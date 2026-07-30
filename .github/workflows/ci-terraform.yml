@@ -47,12 +47,15 @@ jobs:
           soft_fail: true
 
       - name: Configure AWS Credentials via OIDC
+        if: secrets.AWS_OIDC_ROLE_ARN != ''
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
           aws-region: ap-south-1
+          audience: sts.amazonaws.com
 
       - name: Terraform Init & Plan
+        if: secrets.AWS_OIDC_ROLE_ARN != ''
         env:
           TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
         run: |
@@ -61,6 +64,7 @@ jobs:
           terraform plan -var-file=environments/dev.tfvars -out=tfplan
 
       - name: Upload Terraform Plan Artifact
+        if: secrets.AWS_OIDC_ROLE_ARN != ''
         uses: actions/upload-artifact@v4
         with:
           name: tfplan
@@ -69,7 +73,7 @@ jobs:
   terraform-apply:
     name: Terraform Apply (Production / Environment Approval)
     needs: terraform-ci
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && secrets.AWS_OIDC_ROLE_ARN != ''
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -91,6 +95,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
           aws-region: ap-south-1
+          audience: sts.amazonaws.com
 
       - name: Terraform Apply
         env:
