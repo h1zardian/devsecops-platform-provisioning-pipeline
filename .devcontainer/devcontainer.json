@@ -3,7 +3,6 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-
   "features": {
     "ghcr.io/devcontainers/features/terraform:1": {},
     "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
@@ -16,10 +15,9 @@
     "ghcr.io/devcontainers-extra/features/syft:1": {},
     "ghcr.io/devcontainers-extra/features/cosign:1": {},
     "ghcr.io/JasonTheDeveloper/features/trivy:1": {},
-    "ghcr.io/jsburckhardt/devcontainer-features/gitleaks:1": {}
-
+    "ghcr.io/jsburckhardt/devcontainer-features/gitleaks:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
-
   "customizations": {
     "vscode": {
       "settings": {
@@ -35,14 +33,18 @@
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "redhat.vscode-yaml",
         "redhat.ansible",
-        "clutchsecurity.clutch-gitleaks-secrets-scanner"
+        "clutchsecurity.clutch-gitleaks-secrets-scanner",
+        "github.vscode-github-actions"
       ]
     }
   },
-
-  "forwardPorts": [8000, 5432, 8080, 3000, 9090],
-
+  "forwardPorts": [
+    8000,
+    5432,
+    8080,
+    3000,
+    9090
+  ],
   "postCreateCommand": "if [ -f app/requirements.txt ]; then pip install -r app/requirements.txt; fi",
-
   "remoteUser": "vscode"
 }

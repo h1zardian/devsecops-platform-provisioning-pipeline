@@ -3,9 +3,13 @@ data "tls_certificate" "github" {
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
-  url             = "https://token.actions.githubusercontent.com"
-  client_id_list  = ["sts.amazonaws.com"]
-  thumbprint_list = [data.tls_certificate.github.certificates[0].sha1_fingerprint]
+  url            = "https://token.actions.githubusercontent.com"
+  client_id_list = ["sts.amazonaws.com"]
+  thumbprint_list = [
+    "6938fd4d98bab03faadb97b34396831e3780aea1",
+    "1c58a21d81e5b274363b0061446739fe1a221f7c",
+    data.tls_certificate.github.certificates[0].sha1_fingerprint
+  ]
 }
 
 data "aws_iam_policy_document" "github_assume_role" {
@@ -38,7 +42,7 @@ resource "aws_iam_role" "github_actions" {
 
 # Least-privilege IAM policy document for Terraform infrastructure provisioning
 # Note: Resources are set to "*" for dynamic infrastructure creation; in strict enterprise environments,
-# scope resources to specific ARNs (e.g. arn:aws:eks:us-east-1:123456789012:cluster/devsecops-*).
+# scope resources to specific ARNs (e.g. arn:aws:eks:ap-south-1:123456789012:cluster/devsecops-*).
 data "aws_iam_policy_document" "terraform_provisioner" {
   statement {
     sid    = "VPCAndNetworkingPermissions"

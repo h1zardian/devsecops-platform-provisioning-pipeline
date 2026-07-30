@@ -103,7 +103,7 @@ make cluster-up
 
 ### 3. Bootstrap Day 0 Platform Controllers
 ```bash
-aws eks update-kubeconfig --name devsecops-eks-cluster --region us-east-1
+aws eks update-kubeconfig --name devsecops-eks-cluster --region ap-south-1
 make ansible-bootstrap
 ```
 
