@@ -33,7 +33,8 @@
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "redhat.vscode-yaml",
         "redhat.ansible",
-        "clutchsecurity.clutch-gitleaks-secrets-scanner"
+        "clutchsecurity.clutch-gitleaks-secrets-scanner",
+        "github.vscode-github-actions"
       ]
     }
   },
