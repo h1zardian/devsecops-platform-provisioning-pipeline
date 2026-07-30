@@ -29,6 +29,5 @@ module "rds" {
 
 module "oidc" {
   source      = "./modules/oidc"
-  github_repo = var.github_repo
   environment = var.environment
 }

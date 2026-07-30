@@ -28,11 +28,7 @@ variable "db_password" {
   sensitive   = true
 }
 
-variable "github_repo" {
-  description = "GitHub repository format owner/repo for OIDC trust"
-  type        = string
-  default     = "h1zardian/devsecops-platform-provisioning-pipeline"
-}
+
 
 variable "cluster_endpoint_public_access_cidrs" {
   description = "List of CIDRs allowed to access EKS API server"
