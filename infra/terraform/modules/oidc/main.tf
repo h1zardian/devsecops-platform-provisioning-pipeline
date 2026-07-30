@@ -38,7 +38,7 @@ resource "aws_iam_role" "github_actions" {
 
 # Least-privilege IAM policy document for Terraform infrastructure provisioning
 # Note: Resources are set to "*" for dynamic infrastructure creation; in strict enterprise environments,
-# scope resources to specific ARNs (e.g. arn:aws:eks:us-east-1:123456789012:cluster/devsecops-*).
+# scope resources to specific ARNs (e.g. arn:aws:eks:ap-south-1:123456789012:cluster/devsecops-*).
 data "aws_iam_policy_document" "terraform_provisioner" {
   statement {
     sid    = "VPCAndNetworkingPermissions"
